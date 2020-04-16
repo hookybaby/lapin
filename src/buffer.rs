@@ -83,7 +83,7 @@ impl Buffer {
     }
 
     pub(crate) fn write_to<T: io::Write>(&self, writer: &mut T) -> io::Result<usize> {
-        if self.end >= self.position {
+        if self.end > self.position {
             writer.write(&self.memory[self.position..self.end])
         } else {
             writer.write_vectored(&[
